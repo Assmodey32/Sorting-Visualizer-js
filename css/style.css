@@ -12,12 +12,9 @@ body {
 .bar {
   background-color: rgb(238, 238, 238);
   border-radius: 3px;
+  border: 2px solid rgb(48,48,48);
   /* width: 25px; */
   /* height: 100%; */
-}
-
-.bar:not(:last-child) {
-  margin-right: 5px;
 }
 
 .container-fluid {
