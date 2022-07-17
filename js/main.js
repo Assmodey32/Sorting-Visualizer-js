@@ -193,3 +193,69 @@ async function insertionSort() {
   }
   sort_btn.disabled = false;
 }
+
+async function mergeSort() {
+  sort_btn.disabled = true;
+  await mergeSortHelper(array, 0, array.length - 1);
+  sort_btn.disabled = false;
+}
+
+async function mergeSortHelper(array, leftIndex, right) {
+  if (leftIndex < right) {
+    let middle = Math.floor((leftIndex + right) / 2);
+    await mergeSortHelper(array, leftIndex, middle);
+    await mergeSortHelper(array, middle + 1, right);
+    await merge(array, leftIndex, middle, right);
+  }
+}
+
+async function merge(array, left, middle, right) {
+  let bars = document.querySelectorAll('.bar');
+  let tempArray = [];
+  let leftIndex = left;
+  let rightIndex = middle + 1;
+  while (leftIndex <= middle && rightIndex <= right) {
+    let tempLeftIndex = leftIndex;
+    let tempRightIndex = rightIndex;
+    bars[leftIndex].style.backgroundColor = bars[rightIndex].style.backgroundColor = barBackgroundColorTransition;
+    if (array[leftIndex] < array[rightIndex]) {
+      tempArray.push({
+        value: array[leftIndex],
+        height: bars[leftIndex].style.height,
+      });
+      leftIndex++;
+    } else {
+      tempArray.push({
+        value: array[rightIndex],
+        height: bars[rightIndex].style.height,
+      });
+      rightIndex++;
+    }
+    await sleep(delay);
+    bars[tempLeftIndex].style.backgroundColor = bars[tempRightIndex].style.backgroundColor = barBackgroundColor;
+  }
+  while (leftIndex <= middle) {
+    tempArray.push({
+      value: array[leftIndex],
+      height: bars[leftIndex].style.height,
+    });
+    leftIndex++;
+    await sleep(delay);
+  }
+  while (rightIndex <= right) {
+    tempArray.push({
+      value: array[rightIndex],
+      height: bars[rightIndex].style.height,
+    });
+    rightIndex++;
+    await sleep(delay);
+  }
+  for (let i = 0; i < tempArray.length; i++) {
+    array[left + i] = tempArray[i].value;
+    bars[left + i].style.height = tempArray[i].height;
+
+    if (array.length === tempArray.length)
+      bars[left + i].style.backgroundColor = barBackgroundColorSorted;
+    await sleep(delay / 2);
+  }
+}

@@ -13,15 +13,8 @@ body {
   background-color: rgb(238, 238, 238);
   border-radius: 3px;
   border: 2px solid rgb(48,48,48);
-  /* width: 25px; */
-  /* height: 100%; */
 }
 
 .container-fluid {
   background-color: rgb(48, 48, 48);
 }
-
-/* .form-select {
-  background-color: rgb(48, 48, 48);
-  color: rgb(238, 238, 238);
-} */

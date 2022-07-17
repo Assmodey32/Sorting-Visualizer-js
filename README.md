@@ -5,5 +5,5 @@ TO-DO LIST
 - [x] Selection sort
 - [x] Insertion sort
 - [ ] Quick sort
-- [ ] Merge sort
+- [x] Merge sort
 
